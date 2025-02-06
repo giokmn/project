@@ -1,14 +1,50 @@
 const {User}= require('../models/User')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 class UserController{
 
-  static async createUser(req,res){
-    try
-    {
-      const user=await User.create(req.body)
+  static async createUser(req, res) {
+    try {
+      const { FirstName, LastName, UserName, Password, DateBirth, Email, Phone, Role, HireDate } = req.body
+  
+  // Validate required fields
+  if (!FirstName || !LastName || !UserName || !Password || !DateBirth || !Email || !Phone || !Role || !HireDate) {
+    return res.status(400).json({ message: 'All required fields must be provided' })
+  }
+      // Hashing password before we save it
+      const hashedPassword = await bcrypt.hash(Password, 10)
+
+      const user = await User.create({
+        ...req.body,
+        Password: hashedPassword  // Save hash password
+      })
+  
       return res.status(201).json(user)
-    }catch(error){
-      return res.status(500).json({error: error.message})
+    } catch (error) {
+      return res.status(500).json({ error: error.message })
+    }
+  }
+
+  static async loginUser(req, res) {
+    try {
+      const { UserName, Password } = req.body
+      const user = await User.findOne({ where: { UserName } })
+
+      if (!user || !(await bcrypt.compare(Password, user.Password))) {
+        return res.status(401).json({ message: 'Invalid credentials' })
+      }
+
+      // Generating JWT token
+      const token = jwt.sign(
+        { UserId: user.UserId, Role: user.Role },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      )
+
+      return res.status(200).json({ token })
+    } catch (error) {
+      return res.status(500).json({ error: error.message })
     }
   }
   
