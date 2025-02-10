@@ -1,6 +1,5 @@
-'use strict'
-const {Model, DataTypes, Sequelize}=require('sequelize')
-const { noTrueLogging } = require('sequelize/lib/utils/deprecations')
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 module.exports= (sequelize) =>{
 class Payment extends Model{
@@ -19,6 +18,12 @@ Payment.init(
     Name:{
       type:DataTypes.STRING,
     }
+  },
+  {
+    sequelize,  // Make sure to pass the sequelize instance here
+    modelName: 'Payment',
+    timestamps: true,
   }
 )
+return Payment
 }

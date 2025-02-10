@@ -9,12 +9,12 @@ const router = express.Router()
 router.post('/loginuser', UserController.loginUser) // User login
 
 // Private routes (only logged-in users can access)
-router.get('/users', authMiddleware, UserController.getAllUsers) // Get all users
-router.get('/users/:id', authMiddleware, UserController.getUserById) // Get a user by their ID
+router.get('/', authMiddleware, UserController.getAllUsers) // Get all users
+router.get('/:id', authMiddleware, UserController.getUserById) // Get a user by their ID
 
 // Private + Admin-only route
 router.post('/registeruser', authMiddleware, roleMiddleware('Manager', 'Owner'), UserController.createUser) // Register a new user (only accessible by Manager or Owner)
-router.put('/users/:id', authMiddleware, roleMiddleware('Manager', 'Owner'), UserController.updateUser) // Update a user (only accessible by Manager or Owner)
-router.delete('/users/:id', authMiddleware, roleMiddleware('Owner'), UserController.deleteUser) // Delete a user (only accessible by Owner)
+router.put('/:id', authMiddleware, roleMiddleware('Manager', 'Owner'), UserController.updateUser) // Update a user (only accessible by Manager or Owner)
+router.delete('/:id', authMiddleware, roleMiddleware('Owner'), UserController.deleteUser) // Delete a user (only accessible by Owner)
 
 module.exports = router
