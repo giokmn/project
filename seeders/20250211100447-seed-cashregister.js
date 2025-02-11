@@ -4,17 +4,17 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('CashRegisters', [
       {
-        DailyCash: 100.00,   // Početni iznos u registru
+        DailyCash: 10000.00,   // Start amount in register
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        DailyCash: 250.50,   // Početni iznos u registru
+        DailyCash: 250.50,   // New amount
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        DailyCash: 50.75,    // Početni iznos u registru
+        DailyCash: 50.75,   
         createdAt: new Date(),
         updatedAt: new Date(),
       },

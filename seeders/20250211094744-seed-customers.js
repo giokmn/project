@@ -1,31 +1,41 @@
 'use strict';
 
-const { Sequelize } = require('sequelize');
 const bcrypt = require('bcrypt');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const hashedPassword1 = await bcrypt.hash('password123', 10);
-    const hashedPassword2 = await bcrypt.hash('securepass456', 10);
+    const hashedPassword1 = await bcrypt.hash('champion123', 10);
+    const hashedPassword2 = await bcrypt.hash('knockout456', 10);
+    const hashedPassword3 = await bcrypt.hash('tapout789', 10);
 
     return queryInterface.bulkInsert('Customers', [
       {
-        FirstName: 'John',
-        LastName: 'Doe',
-        UserName: 'johndoe',
+        FirstName: 'Conor',
+        LastName: 'McGregor',
+        UserName: 'thenotorious',
         Password: hashedPassword1,
         Phone: '123456789',
-        DeliveryAddress: '123 Main St, City',
+        DeliveryAddress: '12 Crumlin Rd, Dublin',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        FirstName: 'Jane',
-        LastName: 'Smith',
-        UserName: 'janesmith',
+        FirstName: 'Khabib',
+        LastName: 'Nurmagomedov',
+        UserName: 'eagle',
         Password: hashedPassword2,
         Phone: '987654321',
-        DeliveryAddress: '456 Oak St, Town',
+        DeliveryAddress: 'Dagestan, Russia',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        FirstName: 'Anderson',
+        LastName: 'Silva',
+        UserName: 'spider',
+        Password: hashedPassword3,
+        Phone: '111222333',
+        DeliveryAddress: 'Curitiba, Brazil',
         createdAt: new Date(),
         updatedAt: new Date()
       }

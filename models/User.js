@@ -1,10 +1,16 @@
-'use strict';
-const { Model, DataTypes } = require('sequelize');
+"use strict";
+const { Model, DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
 
 module.exports = (sequelize) => {
   class User extends Model {
     static associate(models) {
       // Define associations here
+    }
+
+    // Method for checking password when loging in
+    async checkPassword(password) {
+      return await bcrypt.compare(password, this.Password);
     }
   }
 
@@ -42,7 +48,7 @@ module.exports = (sequelize) => {
         validate: {
           isEmail: true,
           notNull: {
-            msg: 'Email is required.',
+            msg: "Email is required.",
           },
         },
       },
@@ -51,7 +57,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       Role: {
-        type: DataTypes.ENUM('Manager', 'Owner', 'Chef'),
+        type: DataTypes.ENUM("Manager", "Owner", "Chef"),
         allowNull: false,
       },
       HireDate: {
@@ -61,8 +67,21 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'User',
+      modelName: "User",
       timestamps: true, // Adds createdAt and updatedAt columns
+      hooks: {
+        //Hook for hashing password before entry in database
+        beforeCreate: async (user) => {
+          const salt = await bcrypt.genSalt(10);
+          user.Password = await bcrypt.hash(user.Password, salt);
+        },
+        beforeUpdate: async (user) => {
+          if (user.changed("Password")) {
+            const salt = await bcrypt.genSalt(10);
+            user.Password = await bcrypt.hash(user.Password, salt);
+          }
+        },
+      },
     }
   );
 
