@@ -6,12 +6,12 @@ const roleMiddleware = require('../middlewares/RoleMiddleware'); // Import the r
 const router = express.Router();
 
 // Routes accessible by customers
-router.get('/', authMiddleware, OrderController.getAllOrders); // Get all products
-router.get('/:id', authMiddleware, OrderController.getOrderById); // Get a product by its ID
+router.get('/', authMiddleware, OrderController.getAllOrders); // Get all orders
+router.get('/:id', authMiddleware, OrderController.getOrderById); // Get an order by its ID
 
-// Private routes (for creating, updating, and deleting products)
-router.post('/', authMiddleware, roleMiddleware('Manager', 'Owner', 'Chef'), OrderController.createOrder); // Create a new product (only accessible by Manager, Owner, or Chef)
-router.put('/:id', authMiddleware, roleMiddleware('Manager', 'Owner', 'Chef'), OrderController.updateOrder); // Update an existing product (only accessible by Manager, Owner, or Chef)
-router.delete('/:id', authMiddleware, roleMiddleware('Manager', 'Owner', 'Chef'), OrderController.deleteOrder); // Delete a product (only accessible by Manager, Owner, or Chef)
+// Private routes (for creating, updating, and deleting orders)
+router.post('/', authMiddleware, OrderController.createOrder); // Create a new order (accessible by Customer)
+router.put('/:id', authMiddleware, roleMiddleware('Manager', 'Owner', 'Chef'), OrderController.updateOrder); // Update an existing order (only accessible by Manager, Owner, or Chef)
+router.delete('/:id', authMiddleware, roleMiddleware('Manager', 'Owner', 'Chef'), OrderController.deleteOrder); // Delete an order (only accessible by Manager, Owner, or Chef)
 
 module.exports = router;
