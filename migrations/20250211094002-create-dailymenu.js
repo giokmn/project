@@ -1,16 +1,19 @@
 'use strict';
 
+/** @type {import('sequelize-cli').Migration} */
+const { DataTypes } = require('sequelize');  // Imoprt DataTypes
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('DailyMenus', {
       DailyMenuId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
       ProductId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: 'Products',
@@ -20,16 +23,16 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       Discount: {
-        type: Sequelize.DECIMAL(5, 2),
+        type: DataTypes.DECIMAL(5, 2),
         allowNull: false,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
       },
     });
   },

@@ -1,26 +1,29 @@
 'use strict';
 
+/** @type {import('sequelize-cli').Migration} */
+const { DataTypes } = require('sequelize');  // Imoprt DataTypes
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('CashRegisters', {
       RegisterId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
       DailyCash: {
-        type: Sequelize.DECIMAL(10, 2),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
         defaultValue: 0.00,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
       },
     });
   },

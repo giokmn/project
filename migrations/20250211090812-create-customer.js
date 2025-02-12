@@ -1,6 +1,7 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
+const { DataTypes } = require('sequelize');  // Imoprt DataTypes
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Customers', {
@@ -33,11 +34,11 @@ module.exports = {
         type:DataTypes.STRING,
       },
       createdAt: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       updatedAt: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         allowNull: false,
       },
     });

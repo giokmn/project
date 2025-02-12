@@ -1,6 +1,7 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
+const { DataTypes } = require('sequelize');  // Imoprt DataTypes
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Products', {
