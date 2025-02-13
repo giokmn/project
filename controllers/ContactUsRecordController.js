@@ -1,4 +1,4 @@
-const { ContactUsRecord } = require('../models/ContactUsRecord');
+const { ContactUsRecord } = require('../models');
 
 class ContactUsRecordController {
   

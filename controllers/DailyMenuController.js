@@ -1,4 +1,4 @@
-const { DailyMenu } = require('../models/DailyMenu')
+const { DailyMenu } = require('../models')
 
 class DailyMenuController {
 

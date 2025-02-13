@@ -1,4 +1,4 @@
-const { Grocery } = require('../models/Grocery');
+const { Grocery } = require('../models');
 
 class GroceryController {
 

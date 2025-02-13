@@ -1,4 +1,4 @@
-const { CashRegister } = require('../models/CashRegister')
+const { CashRegister } = require('../models')
 
 class CashRegisterController {
 

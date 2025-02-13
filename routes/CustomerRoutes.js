@@ -1,20 +1,27 @@
 const express = require('express');
 const CustomerController = require('../controllers/CustomerController');
-const authMiddleware = require('../middlewares/AuthMiddleware'); // Import the authentication middleware
-const roleMiddleware = require('../middlewares/RoleMiddleware'); // Import the role-based middleware
+const authMiddleware = require('../middlewares/AuthMiddleware'); // Middleware for authentication
+const roleMiddleware = require('../middlewares/RoleMiddleware'); // Middleware for role-based access
 
 const router = express.Router();
+const customerRouter = express.Router(); // Nested router for authenticated users
 
-// Public routes (everyone can register and login)
-router.post('/logincustomer', CustomerController.loginCustomer); // User login route
-router.post('/registercustomer', CustomerController.createCustomer); // User registration route
+// Public routes (anyone can register and login)
+router.post('/logincustomer', CustomerController.loginCustomer); // Customer login
+router.post('/registercustomer', CustomerController.createCustomer); // Customer registration
 
-// Routes accessible by the customer (self-management) and other users
-router.put('/:id', authMiddleware, roleMiddleware('Customer', 'Manager', 'Owner', 'Chef'), CustomerController.updateCustomer); // Update customer details (accessible by Customer, Manager, Owner, or Chef)
-router.delete('/:id', authMiddleware, roleMiddleware('Customer', 'Manager', 'Owner', 'Chef'), CustomerController.deleteCustomer); // Delete customer (accessible by Customer, Manager, Owner, or Chef)
+// Protect all routes below with authentication
+router.use(authMiddleware);
 
-// Private routes (only accessible by users with specific roles)
-router.get('/', authMiddleware, roleMiddleware('Manager', 'Owner', 'Chef'), CustomerController.getAllCustomers); // Get all customers (only accessible by Manager, Owner, or Chef)
-router.get('/:id', authMiddleware, roleMiddleware('Manager', 'Owner', 'Chef'), CustomerController.getCustomerById); // Get a specific customer by ID (only accessible by Manager, Owner, or Chef)
+// Customer self-management routes (Customer can update/delete their own data)
+customerRouter.put('/:id', roleMiddleware('Customer', 'Manager', 'Owner', 'Chef'), CustomerController.updateCustomer); // Update customer
+customerRouter.delete('/:id', roleMiddleware('Customer', 'Manager', 'Owner', 'Chef'), CustomerController.deleteCustomer); // Delete customer
+
+// Admin-only routes (Only Manager, Owner, and Chef can access customer data)
+customerRouter.get('/', roleMiddleware('Manager', 'Owner', 'Chef'), CustomerController.getAllCustomers); // Get all customers
+customerRouter.get('/:id', roleMiddleware('Manager', 'Owner', 'Chef'), CustomerController.getCustomerById); // Get a specific customer
+
+// Mount private routes under `/private`
+router.use('/private', customerRouter);
 
 module.exports = router;
