@@ -1,3 +1,4 @@
+// routes/UserRoutes.js
 const express = require('express');
 const UserController = require('../controllers/UserController');
 const authMiddleware = require('../middlewares/AuthMiddleware'); // Middleware for authentication
@@ -20,6 +21,9 @@ userRouter.get('/:id', UserController.getUserById); // Get a user by ID
 userRouter.post('/registeruser', roleMiddleware('Manager', 'Owner'), UserController.createUser); // Register a new user
 userRouter.put('/:id', roleMiddleware('Manager', 'Owner'), UserController.updateUser); // Update user
 userRouter.delete('/:id', roleMiddleware('Owner'), UserController.deleteUser); // Delete user (Owner only)
+
+// Add the logout route for authenticated users
+userRouter.post('/logoutuser', UserController.logoutUser); // Logout user
 
 router.use('/private', userRouter); // Mount nested routes under `/private`
 

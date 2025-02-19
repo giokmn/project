@@ -9,11 +9,11 @@ const db = {};
 
 //Configuration of connection to base
 const config = {
-  username: process.env.DATABASE_USER || 'root',
-  password: process.env.DATABASE_PASSWORD || 'root',
-  database: process.env.DATABASE_NAME || 'restaurant',
-  host: process.env.DATABASE_HOST || '127.0.0.1',
-  dialect: process.env.DATABASE_DIALECT || 'mysql',
+  username: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  host: process.env.DATABASE_HOST,
+  dialect: process.env.DATABASE_DIALECT,
 };
 
 // Creating Sequelize instance

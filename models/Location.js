@@ -9,11 +9,6 @@ module.exports = (sequelize) => {
 
   Location.init(
     {
-      LocationId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       Name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -25,8 +20,6 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'Location',
-      timestamps: true, 
     }
   );
 

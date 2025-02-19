@@ -6,28 +6,28 @@ module.exports = {
     await queryInterface.bulkInsert('Payments', [
       {
         Name: 'Credit Card',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
       {
         Name: 'Debit Card',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
       {
         Name: 'PayPal',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
       {
         Name: 'Bank Transfer',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
       {
         Name: 'Cash',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
     ], {});
   },

@@ -10,11 +10,6 @@ module.exports = (sequelize) => {
 
   CashRegister.init(
     {
-      RegisterId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       DailyCash: {
         type: DataTypes.DECIMAL(10, 2), 
         allowNull: false, 
@@ -23,8 +18,6 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'CashRegister',
-      timestamps: true,
     }
   );
 

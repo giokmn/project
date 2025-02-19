@@ -16,8 +16,8 @@ module.exports = {
         Password: hashedPassword1,
         Phone: '123456789',
         DeliveryAddress: '12 Crumlin Rd, Dublin',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
       {
         FirstName: 'Khabib',
@@ -26,8 +26,8 @@ module.exports = {
         Password: hashedPassword2,
         Phone: '987654321',
         DeliveryAddress: 'Dagestan, Russia',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
       {
         FirstName: 'Anderson',
@@ -36,8 +36,8 @@ module.exports = {
         Password: hashedPassword3,
         Phone: '111222333',
         DeliveryAddress: 'Curitiba, Brazil',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       }
     ]);
   },

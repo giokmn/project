@@ -1,11 +1,12 @@
 'use strict';
 
 /** @type {import('sequelize-cli').Migration} */
-const { DataTypes } = require('sequelize');  // Imoprt DataTypes
+const { DataTypes } = require('sequelize');  // Import DataTypes
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Customers', {
-      CustomerId: {
+      CustomerId: {  // Primary key
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -18,11 +19,11 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      UserName:{
+      UserName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      Password:{
+      Password: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -30,9 +31,10 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      DeliveryAddress:{
-        type:DataTypes.STRING,
+      DeliveryAddress: {
+        type: DataTypes.STRING,
       },
+      // Timestamp fields
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,

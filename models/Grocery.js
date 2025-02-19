@@ -10,11 +10,6 @@ module.exports = (sequelize) => {
 
   Grocery.init(
     {
-      GroceryId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       Name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -24,14 +19,12 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       Price: {
-        type: DataTypes.DECIMAL(10, 2), // Tip za cenu
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: 'Grocery',
-      timestamps: true,
     }
   );
 

@@ -10,11 +10,6 @@ module.exports = (sequelize) => {
 
   DailyMenu.init(
     {
-      DailyMenuId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       ProductId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -30,8 +25,6 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'DailyMenu',
-      timestamps: true,
     }
   );
 

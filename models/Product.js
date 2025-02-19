@@ -12,11 +12,6 @@ module.exports = (sequelize) => {
 
   Product.init(
     {
-      ProductId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       Name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -32,8 +27,6 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'Product',
-      timestamps: true, // createdAt and updatedAt
     }
   );
 

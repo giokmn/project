@@ -12,11 +12,6 @@ module.exports = (sequelize) => {
 
   Customer.init(
     {
-      CustomerId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       FirstName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -43,18 +38,18 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'Customer',
-      timestamps: true, // Adds createdAt and updatedAt columns
       hooks: {
         // Hook for hashing password before saving the customer instance
         beforeCreate: async (customer) => {
           if (customer.Password) {
-            customer.Password = await bcrypt.hash(customer.Password, 10);
+            const salt = await bcrypt.genSalt(10);
+            customer.Password = await bcrypt.hash(customer.Password, salt);
           }
         },
         beforeUpdate: async (customer) => {
-          if (customer.Password) {
-            customer.Password = await bcrypt.hash(customer.Password, 10);
+          if (customer.changed('Password')) {
+            const salt = await bcrypt.genSalt(10);
+            customer.Password = await bcrypt.hash(customer.Password, salt);
           }
         },
       },

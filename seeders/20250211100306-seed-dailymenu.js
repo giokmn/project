@@ -2,29 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    // Inserting sample data into the 'DailyMenus' table
     await queryInterface.bulkInsert('DailyMenus', [
       {
-        ProductId: 1,    // Pretpostavljamo da proizvod sa ID 1 postoji u tabeli Products
-        Discount: 10.00,  // Popust od 10%
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        ProductId: 1,    // Assuming a product with ID 1 exists in the 'Products' table
+        Discount: 10.00,  // 10% discount for this product
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
       {
-        ProductId: 2,    // Pretpostavljamo da proizvod sa ID 2 postoji u tabeli Products
-        Discount: 15.50,  // Popust od 15.50%
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        ProductId: 2,    // Assuming a product with ID 2 exists in the 'Products' table
+        Discount: 15.50,  // 15.5% discount for this product
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
       {
-        ProductId: 3,    // Pretpostavljamo da proizvod sa ID 3 postoji u tabeli Products
-        Discount: 5.00,   // Popust od 5%
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        ProductId: 3,    // Assuming a product with ID 3 exists in the 'Products' table
+        Discount: 5.00,   // 5% discount for this product
+        createdAt: new Date(),  // Add createdAt
+        updatedAt: new Date(),  // Add updatedAt
       },
     ], {});
   },
 
   down: async (queryInterface, Sequelize) => {
+    // Deleting all data from the 'DailyMenus' table (rollback the above insertion)
     await queryInterface.bulkDelete('DailyMenus', null, {});
   }
 };

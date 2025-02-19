@@ -21,6 +21,9 @@ customerRouter.delete('/:id', roleMiddleware('Customer', 'Manager', 'Owner', 'Ch
 customerRouter.get('/', roleMiddleware('Manager', 'Owner', 'Chef'), CustomerController.getAllCustomers); // Get all customers
 customerRouter.get('/:id', roleMiddleware('Manager', 'Owner', 'Chef'), CustomerController.getCustomerById); // Get a specific customer
 
+// Private route for logout (only authenticated users can access it)
+customerRouter.post('/logoutcustomer', CustomerController.logoutCustomer); // Customer logout
+
 // Mount private routes under `/private`
 router.use('/private', customerRouter);
 

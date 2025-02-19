@@ -10,11 +10,6 @@ module.exports = (sequelize) => {
 
   ContactUsRecord.init(
     {
-      Id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       CustomerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -43,8 +38,6 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'ContactUsRecord',
-      timestamps: true,
     }
   );
 

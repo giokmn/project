@@ -7,20 +7,10 @@ module.exports = (sequelize) => {
     static associate(models) {
       // Define associations here
     }
-
-    // Method for checking password when loging in
-    async checkPassword(password) {
-      return await bcrypt.compare(password, this.Password);
-    }
   }
 
   User.init(
     {
-      UserId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       FirstName: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -67,8 +57,6 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: "User",
-      timestamps: true, // Adds createdAt and updatedAt columns
       hooks: {
         //Hook for hashing password before entry in database
         beforeCreate: async (user) => {

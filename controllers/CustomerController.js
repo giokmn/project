@@ -48,6 +48,16 @@ class CustomerController {
     }
   }
 
+  static async logoutCustomer(req, res) {
+    try {
+      // Typically, JWT tokens are handled client-side and are removed by the client. 
+      // Example: Just return a response telling the client to delete the token
+      return res.status(200).json({ message: "Logout successful, please remove your JWT token from client storage." });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
   static async getAllCustomers(req, res) {
     try {
       const customers = await Customer.findAll();

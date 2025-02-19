@@ -12,11 +12,6 @@ module.exports = (sequelize) => {
 
   Order.init(
     {
-      OrderId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       CustomerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -40,8 +35,6 @@ module.exports = (sequelize) => {
     },
     {
       sequelize,
-      modelName: 'Order',
-      timestamps: true, // createdAt i updatedAt
     }
   );
 

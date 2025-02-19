@@ -1,6 +1,6 @@
-const {User}= require('../models')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const { User } = require('../models');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 class UserController {
   // Register a new user
@@ -73,6 +73,19 @@ class UserController {
       );
 
       return res.status(200).json({ message: "Login successful", token });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  // User logout
+  static async logoutUser(req, res) {
+    try {
+      // Clear the JWT token from the cookie
+      res.clearCookie('token'); // Assuming the token is stored in a cookie
+
+      // Send a success response
+      return res.status(200).json({ message: "User logged out successfully" });
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
