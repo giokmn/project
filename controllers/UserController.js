@@ -24,14 +24,12 @@ class UserController {
         return res.status(400).json({ message: "Username is already taken" });
       }
 
-      // Hashing password before saving
-      const hashedPassword = await bcrypt.hash(Password, 10);
-
+      // Create user - hashing is handled by the model hook
       const user = await User.create({
         FirstName,
         LastName,
         UserName,
-        Password: hashedPassword,
+        Password, // Pass raw password, hook will hash it
         DateBirth,
         Email,
         Phone,
@@ -81,11 +79,8 @@ class UserController {
   // User logout
   static async logoutUser(req, res) {
     try {
-      // Clear the JWT token from the cookie
-      res.clearCookie('token'); // Assuming the token is stored in a cookie
-
-      // Send a success response
-      return res.status(200).json({ message: "User logged out successfully" });
+      // Since we're using JWT in headers, logout is client-side (no server action needed)
+      return res.status(200).json({ message: "User logged out successfully - please remove token on client side" });
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -94,7 +89,9 @@ class UserController {
   // Get all users
   static async getAllUsers(req, res) {
     try {
-      const users = await User.findAll();
+      const users = await User.findAll({
+        attributes: { exclude: ['Password'] } // Exclude password for security
+      });
       return res.status(200).json(users);
     } catch (error) {
       return res.status(500).json({ error: error.message });
@@ -105,7 +102,9 @@ class UserController {
   static async getUserById(req, res) {
     try {
       const { id } = req.params;
-      const user = await User.findByPk(id);
+      const user = await User.findByPk(id, {
+        attributes: { exclude: ['Password'] } // Exclude password
+      });
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
@@ -119,15 +118,14 @@ class UserController {
   static async updateUser(req, res) {
     try {
       const { id } = req.params;
-      const { Password, ...updateData } = req.body;
+      const updateData = req.body;
 
-      if (Password) {
-        updateData.Password = await bcrypt.hash(Password, 10);
-      }
-
+      // Password hashing handled by model hook if present
       const [updated] = await User.update(updateData, { where: { UserId: id } });
       if (updated) {
-        const updatedUser = await User.findByPk(id);
+        const updatedUser = await User.findByPk(id, {
+          attributes: { exclude: ['Password'] }
+        });
         return res.status(200).json(updatedUser);
       }
       return res.status(404).json({ message: "User not found" });
