@@ -47,32 +47,32 @@ Contributions are welcome! If you’d like to contribute, please feel free to fo
 3. Set up environment variables in a `.env` file:
  ```bash
     1.For Development:
-    ```bash
+    
     PORT=8080
     DB_HOST=localhost
     DB_USER=root
     DB_PASS=password
     DB_NAME=restaurant_db
     DATABASE_DIALECT=mysql
-    ```
+   
     2.For Test:
-    ```bash
+    
     PORT=8080
     DATABASE_USER_TEST=root
     DATABASE_PASSWORD_TEST=null
     DATABASE_NAME_TEST=database_test
     DATABASE_HOST_TEST=127.0.0.1
     DATABASE_DIALECT_TEST=mysql
-    ```
+   
     3.For Production:
-    ```bash
+    
     PORT=8080
     DATABASE_USER_PROD=root
     DATABASE_PASSWORD_PROD=null
     DATABASE_NAME_PROD=database_production
     DATABASE_HOST_PROD=127.0.0.1
     DATABASE_DIALECT_PROD=mysql
-    ```
+    
 ```
 5. Run migrations to set up the database:
 
