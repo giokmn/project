@@ -45,24 +45,48 @@ Contributions are welcome! If you’d like to contribute, please feel free to fo
     ```
 
 3. Set up environment variables in a `.env` file:
-
+    1.For Development:
     ```bash
+    PORT=8080
     DB_HOST=localhost
     DB_USER=root
     DB_PASS=password
     DB_NAME=restaurant_db
+    DATABASE_DIALECT=mysql
     ```
-
+    2.For Test:
+    ```bash
+    PORT=8080
+    DATABASE_USER_TEST=root
+    DATABASE_PASSWORD_TEST=null
+    DATABASE_NAME_TEST=database_test
+    DATABASE_HOST_TEST=127.0.0.1
+    DATABASE_DIALECT_TEST=mysql
+    ```
+    3.For Production:
+    ```bash
+    PORT=8080
+    DATABASE_USER_PROD=root
+    DATABASE_PASSWORD_PROD=null
+    DATABASE_NAME_PROD=database_production
+    DATABASE_HOST_PROD=127.0.0.1
+    DATABASE_DIALECT_PROD=mysql
+    ```
 4. Run migrations to set up the database:
 
     ```bash
     npx sequelize-cli db:migrate
     ```
-
-5. Start the server:
+5. Run seeders to populate the database with test data:
 
     ```bash
-    npm start
+    npx sequelize-cli db:seed:all
+    ```
+
+6. Start the server:
+
+    ```bash
+    npm run start
     ```
 
     The backend will be available at [http://localhost:8080](http://localhost:8080).
@@ -86,4 +110,4 @@ Restaurant-Backend/
 
 ## ✨ Conclusion
 
-I hope this project helps you learn how to build a robust backend system for restaurant management. If you find any issues or have suggestions for improvements, feel free to create a pull request. 
+I hope this project helps you learn how to build a robust backend system for restaurant management. If you find any issues or have suggestions for improvements, feel free to submit a pull request. 
