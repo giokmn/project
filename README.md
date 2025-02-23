@@ -45,6 +45,7 @@ Contributions are welcome! If you’d like to contribute, please feel free to fo
     ```
 
 3. Set up environment variables in a `.env` file:
+ ```bash
     1.For Development:
     ```bash
     PORT=8080
@@ -72,18 +73,19 @@ Contributions are welcome! If you’d like to contribute, please feel free to fo
     DATABASE_HOST_PROD=127.0.0.1
     DATABASE_DIALECT_PROD=mysql
     ```
-4. Run migrations to set up the database:
+```
+5. Run migrations to set up the database:
 
     ```bash
     npx sequelize-cli db:migrate
     ```
-5. Run seeders to populate the database with test data:
+6. Run seeders to populate the database with test data:
 
     ```bash
     npx sequelize-cli db:seed:all
     ```
 
-6. Start the server:
+7. Start the server:
 
     ```bash
     npm run start
