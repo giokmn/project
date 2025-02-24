@@ -45,16 +45,18 @@ Contributions are welcome! If you’d like to contribute, please feel free to fo
     ```
 
 3. Set up environment variables in a `.env` file:
-    1.For Development:
+
+   # 1.Development
     ```bash
     PORT=8080
-    DB_HOST=localhost
-    DB_USER=root
-    DB_PASS=password
-    DB_NAME=restaurant_db
+    DATABASE_HOST=localhost
+    DATABASE_USER=root
+    DATABASE_PASS=password
+    DATABASE_NAME=restaurant_db
     DATABASE_DIALECT=mysql
+    JWT_SECRET=addsecretkey # Replace with your own strong, unique secret key (min 32 characters)
     ```
-    2.For Test:
+    # 2.Test
     ```bash
     PORT=8080
     DATABASE_USER_TEST=root
@@ -62,8 +64,9 @@ Contributions are welcome! If you’d like to contribute, please feel free to fo
     DATABASE_NAME_TEST=database_test
     DATABASE_HOST_TEST=127.0.0.1
     DATABASE_DIALECT_TEST=mysql
+    JWT_SECRET=addsecretkey # Replace with your own strong, unique secret key (min 32 characters)
     ```
-    3.For Production:
+    # 3.Production
     ```bash
     PORT=8080
     DATABASE_USER_PROD=root
@@ -71,6 +74,7 @@ Contributions are welcome! If you’d like to contribute, please feel free to fo
     DATABASE_NAME_PROD=database_production
     DATABASE_HOST_PROD=127.0.0.1
     DATABASE_DIALECT_PROD=mysql
+    JWT_SECRET=addsecretkey # Replace with your own strong, unique secret key (min 32 characters)
     ```
 4. Run migrations to set up the database:
 
@@ -95,7 +99,6 @@ Contributions are welcome! If you’d like to contribute, please feel free to fo
 
 ```bash
 Restaurant-Backend/  
-├── node_modules/          # Node.js modules (auto-generated)
 ├── config/                # Configuration files
 ├── controllers/           # Controller files for handling business logic
 ├── migrations/            # Database migration files
@@ -105,6 +108,7 @@ Restaurant-Backend/
 ├── .env                   # Environment variables
 ├── .gitignore             # Git ignore rules
 ├── package.json           # Project metadata and dependencies
+├── package-lock.json      # Locks dependency versions for consistent installs
 └── server.js              # Main file to initialize the server
 ```
 

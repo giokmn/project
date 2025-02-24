@@ -1,31 +1,22 @@
-'use strict';
+'use strict';  
+// Strict mode for safer JS.
 
-/** @type {import('sequelize-cli').Migration} */
-const { DataTypes } = require('sequelize');  // Imoprt DataTypes
+const { DataTypes } = require('sequelize');  
+// Imports Sequelize DataTypes.
+
 module.exports = {
   async up (queryInterface, Sequelize) {
+    // Creates 'Payments' table.
     await queryInterface.createTable('Payments', {
-      PaymentId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      Name: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
+      PaymentId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }, // Auto-incrementing PK.
+      Name: { type: DataTypes.STRING, allowNull: true }, // Optional payment name.
+      createdAt: { type: DataTypes.DATE, allowNull: false }, // Creation timestamp.
+      updatedAt: { type: DataTypes.DATE, allowNull: false }, // Update timestamp.
     });
   },
 
   async down (queryInterface, Sequelize) {
+    // Drops 'Payments' table.
     await queryInterface.dropTable('Payments');
   }
 };

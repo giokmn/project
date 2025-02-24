@@ -1,25 +1,25 @@
-'use strict';
-const { Model, DataTypes } = require('sequelize');
+'use strict';  
+// Strict mode for safer JS.
 
-module.exports = (sequelize) => {
-  class CashRegister extends Model {
-    static associate(models) {
-   
+const { Model, DataTypes } = require('sequelize');  
+// Imports Sequelize Model and DataTypes.
+
+module.exports = (sequelize) => {  
+  // Exports function to define CashRegister model.
+  class CashRegister extends Model {  
+    static associate(models) {  
+      // Placeholder for associations.
     }
   }
 
   CashRegister.init(
     {
-      DailyCash: {
-        type: DataTypes.DECIMAL(10, 2), 
-        allowNull: false, 
-        defaultValue: 0.00, 
-      },
+      DailyCash: { type: DataTypes.DECIMAL(10, 2), allowNull: false, defaultValue: 0.00 }, // Required cash amount, defaults to 0.00.
     },
     {
-      sequelize,
+      sequelize, // Sequelize instance.
     }
   );
 
-  return CashRegister;
+  return CashRegister; // Returns CashRegister model.
 };

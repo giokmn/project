@@ -1,22 +1,26 @@
-'use strict';
-const { Model, DataTypes } = require('sequelize');
+'use strict';  
+// Strict mode for safer JS.
 
-module.exports= (sequelize) =>{
-class Payment extends Model{
-  static associate(models){
-    Payment.hasMany(models.Order, { foreignKey: 'PaymentId' });
-  }
-}
+const { Model, DataTypes } = require('sequelize');  
+// Imports Sequelize Model and DataTypes.
 
-Payment.init(
-  {
-    Name:{
-      type:DataTypes.STRING,
+module.exports = (sequelize) => {  
+  // Exports function to define Payment model.
+  class Payment extends Model {  
+    static associate(models) {  
+      // Defines model associations.
+      Payment.hasMany(models.Order, { foreignKey: 'PaymentId' }); // 1:N with Order.
     }
-  },
-  {
-    sequelize,  // Make sure to pass the sequelize instance here
   }
-)
-return Payment;
-}
+
+  Payment.init(
+    {
+      Name: { type: DataTypes.STRING }, // Optional payment name.
+    },
+    {
+      sequelize, // Sequelize instance.
+    }
+  );
+
+  return Payment; // Returns Payment model.
+};

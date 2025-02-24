@@ -1,8 +1,8 @@
-'use strict';
+'use strict'; // Enables strict mode to enforce safer coding practices and catch errors
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    // Inserting sample data into the 'Orders' table
+      // 'up' function executes when applying the migration to insert data
     await queryInterface.bulkInsert('Orders', [
       {
         CustomerId: 1,  // Assuming a user with ID 1 exists in the 'Customers' table

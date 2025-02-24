@@ -18,9 +18,10 @@ productRouter.get('/', ProductController.getAllProducts);
 productRouter.get('/:id', ProductController.getProductById);
 
 // Private routes for Admin roles (Manager, Owner, Chef)
-productRouter.post('/', roleMiddleware('Manager', 'Owner', 'Chef'), ProductController.createProduct);
-productRouter.put('/:id', roleMiddleware('Manager', 'Owner', 'Chef'), ProductController.updateProduct);
-productRouter.delete('/:id', roleMiddleware('Manager', 'Owner', 'Chef'), ProductController.deleteProduct);
+productRouter.use(roleMiddleware('Manager', 'Owner', 'Chef')); // Apply roleMiddleware to all following routes
+productRouter.post('/', ProductController.createProduct);
+productRouter.put('/:id', ProductController.updateProduct);
+productRouter.delete('/:id', ProductController.deleteProduct);
 
 router.use('/private', productRouter); // Mount nested routes under `/private`
 

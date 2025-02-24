@@ -1,6 +1,6 @@
-const { Customer } = require('../models');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const { Customer } = require('../models'); // Import the Customer model
+const bcrypt = require('bcryptjs'); // Importing bcrypt for password hashing
+const jwt = require('jsonwebtoken'); // Importing jsonwebtoken for authentication
 
 class CustomerController {
   static async createCustomer(req, res) {
@@ -29,7 +29,7 @@ class CustomerController {
 
       return res.status(201).json(customer);
     } catch (error) {
-      return res.status(500).json({ error: 'An error occurred while creating the customer' });
+      return res.status(500).json({ error: error.message || 'An error occurred while creating the customer' });
     }
   }
 
@@ -47,6 +47,11 @@ class CustomerController {
         return res.status(401).json({ message: 'Invalid credentials' });
       }
 
+      // Ensure JWT secret is defined
+      if (!process.env.JWT_SECRET) {
+        return res.status(500).json({ message: "JWT secret key is missing" });
+      }
+
       // Generate JWT token
       const token = jwt.sign(
         { CustomerId: customer.CustomerId, Role: 'Customer' },
@@ -56,16 +61,12 @@ class CustomerController {
 
       return res.status(200).json({ token });
     } catch (error) {
-      return res.status(500).json({ error: 'An error occurred during login' });
+      return res.status(500).json({ error: error.message || 'An error occurred during login' });
     }
   }
 
   static async logoutCustomer(req, res) {
-    try {
-      return res.status(200).json({ message: "Logout successful, please remove your JWT token from client storage" });
-    } catch (error) {
-      return res.status(500).json({ error: 'An error occurred during logout' });
-    }
+    return res.status(200).json({ message: "Logout successful, please remove your JWT token from client storage" });
   }
 
   static async getAllCustomers(req, res) {
@@ -75,7 +76,7 @@ class CustomerController {
       });
       return res.status(200).json(customers);
     } catch (error) {
-      return res.status(500).json({ error: 'An error occurred while fetching customers' });
+      return res.status(500).json({ error: error.message || 'An error occurred while fetching customers' });
     }
   }
 
@@ -90,7 +91,7 @@ class CustomerController {
       }
       return res.status(200).json(customer);
     } catch (error) {
-      return res.status(500).json({ error: 'An error occurred while fetching the customer' });
+      return res.status(500).json({ error: error.message || 'An error occurred while fetching the customer' });
     }
   }
 
@@ -98,18 +99,24 @@ class CustomerController {
     try {
       const { id } = req.params;
       const updateData = req.body;
-
-      // Password hashing handled by model hook if present
-      const [updated] = await Customer.update(updateData, { where: { CustomerId: id } });
-      if (updated) {
-        const updatedCustomer = await Customer.findByPk(id, {
-          attributes: { exclude: ['Password'] }
-        });
-        return res.status(200).json(updatedCustomer);
+  
+      // Update customer information - hooks (e.g., password hashing) are triggered if defined
+      const [updated] = await Customer.update(updateData, { 
+        where: { CustomerId: id },
+        individualHooks: true // Enables hooks like beforeUpdate for password hashing
+      });
+      if (!updated) {
+        return res.status(404).json({ message: 'Customer not found' });
       }
-      return res.status(404).json({ message: 'Customer not found' });
+  
+      // Fetch updated customer data, excluding the password field
+      const updatedCustomer = await Customer.findByPk(id, {
+        attributes: { exclude: ['Password'] }
+      });
+  
+      return res.status(200).json(updatedCustomer);
     } catch (error) {
-      return res.status(500).json({ error: 'An error occurred while updating the customer' });
+      return res.status(500).json({ error: error.message || 'An error occurred while updating the customer' });
     }
   }
 
@@ -117,12 +124,12 @@ class CustomerController {
     try {
       const { id } = req.params;
       const deleted = await Customer.destroy({ where: { CustomerId: id } });
-      if (deleted) {
-        return res.status(204).send();
+      if (!deleted) {
+        return res.status(404).json({ message: 'Customer not found' });
       }
-      return res.status(404).json({ message: 'Customer not found' });
+      return res.status(204).send();
     } catch (error) {
-      return res.status(500).json({ error: 'An error occurred while deleting the customer' });
+      return res.status(500).json({ error: error.message || 'An error occurred while deleting the customer' });
     }
   }
 }

@@ -6,8 +6,8 @@ module.exports = {
       {
         Name: 'Main Restaurant Location',
         Phone: '+1234567890',
-        createdAt: new Date(),  // Add createdAt
-        updatedAt: new Date(),  // Add updatedAt
+        createdAt: new Date(),
+        updatedAt: new Date(), 
       },
     ], {});
   },

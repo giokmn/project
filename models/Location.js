@@ -1,27 +1,26 @@
-'use strict';
-const { Model, DataTypes } = require('sequelize');
+'use strict';  
+// Strict mode for safer JS.
 
-module.exports = (sequelize) => {
-  class Location extends Model {
-    static associate(models) {
+const { Model, DataTypes } = require('sequelize');  
+// Imports Sequelize Model and DataTypes.
+
+module.exports = (sequelize) => {  
+  // Exports function to define Location model.
+  class Location extends Model {  
+    static associate(models) {  
+      // Placeholder for associations.
     }
   }
 
   Location.init(
     {
-      Name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      Phone: {
-        type: DataTypes.STRING,
-        allowNull: true, 
-      },
+      Name: { type: DataTypes.STRING, allowNull: false }, // Required location name.
+      Phone: { type: DataTypes.STRING }, // Optional phone number.
     },
     {
-      sequelize,
+      sequelize, // Sequelize instance.
     }
   );
 
-  return Location;
+  return Location; // Returns Location model.
 };
