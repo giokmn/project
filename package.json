@@ -4,7 +4,7 @@
   "description": "- Current status: In development!📜",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "sequelize": "^6.37.5"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "sequelize-cli": "^6.6.2"
   }
 }
