@@ -1,5 +1,5 @@
 const { User } = require('../models'); // Importing the User model from the models directory
-const bcrypt = require('bcryptjs'); // Importing bcrypt for password hashing
+const bcrypt = require('bcrypt'); // Importing bcrypt for password hashing
 const jwt = require('jsonwebtoken'); // Importing jsonwebtoken for authentication
 
 class UserController {

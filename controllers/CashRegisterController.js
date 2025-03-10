@@ -27,11 +27,9 @@ class CashRegisterController {
     try {
       const { id } = req.params;
       const cashRegister = await CashRegister.findByPk(id);
-
       if (!cashRegister) {
         return res.status(404).json({ message: 'Cash register not found' }); // Return 404 if not found
       }
-
       return res.status(200).json(cashRegister); // Return record if found
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Return error if retrieval fails
@@ -43,11 +41,9 @@ class CashRegisterController {
     try {
       const { id } = req.params;
       const [updated] = await CashRegister.update(req.body, { where: { RegisterId: id } });
-
       if (!updated) {
         return res.status(404).json({ message: 'Cash register not found' }); // Return 404 if not found
       }
-
       const updatedCashRegister = await CashRegister.findByPk(id);
       return res.status(200).json(updatedCashRegister); // Return updated record
     } catch (error) {
@@ -60,11 +56,9 @@ class CashRegisterController {
     try {
       const { id } = req.params;
       const deleted = await CashRegister.destroy({ where: { RegisterId: id } });
-
       if (!deleted) {
         return res.status(404).json({ message: 'Cash register not found' }); // Return 404 if not found
       }
-
       return res.status(204).send(); // Return 204 (No Content) on successful deletion
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Return error if deletion fails

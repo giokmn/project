@@ -11,7 +11,6 @@ class ContactUsRecordController {
       res.status(400).json({ error: error.message });
     }
   }
-
   // PUBLIC: Get all ContactUs records (only Id, Message, and Response)
   static async getPublicContactUsRecords(req, res) {
     try {
