@@ -27,11 +27,9 @@ class GroceryController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const grocery = await Grocery.findByPk(id); // Find grocery item by primary key (ID)
-
       if (!grocery) {
         return res.status(404).json({ message: 'Grocery not found' }); // Return 404 if grocery doesn't exist
       }
-
       return res.status(200).json(grocery); // Return found grocery item with HTTP 200 (OK)
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Return error message if retrieval fails
@@ -43,11 +41,9 @@ class GroceryController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const [updated] = await Grocery.update(req.body, { where: { GroceryId: id } }); // Update grocery data
-
       if (!updated) {
         return res.status(404).json({ message: 'Grocery not found' }); // Return 404 if no rows were updated
       }
-
       const updatedGrocery = await Grocery.findByPk(id); // Fetch the updated grocery item
       return res.status(200).json(updatedGrocery); // Return updated grocery with HTTP 200 (OK)
     } catch (error) {
@@ -60,11 +56,9 @@ class GroceryController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const deleted = await Grocery.destroy({ where: { GroceryId: id } }); // Delete grocery item by ID
-
       if (!deleted) {
         return res.status(404).json({ message: 'Grocery not found' }); // Return 404 if no rows were deleted
       }
-
       return res.status(204).send(); // Return HTTP 204 (No Content) on successful deletion
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Return error message if deletion fails

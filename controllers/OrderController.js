@@ -26,8 +26,7 @@ class OrderController {
   static async getOrderById(req, res) {
     try {
       const { id } = req.params; // Extracting order ID from request parameters
-      const order = await Order.findByPk(id); // Finding order by primary key
-      
+      const order = await Order.findByPk(id); // Finding order by primary key     
       if (!order) {
         return res.status(404).json({ message: 'Order not found' }); // Not found response
       }
@@ -40,15 +39,12 @@ class OrderController {
   // Private route: Update an existing order
   static async updateOrder(req, res) {
     try {
-      const { id } = req.params; // Extracting order ID from request parameters
-      
+      const { id } = req.params; // Extracting order ID from request parameters     
       // Updating order details in the database
       const [updated] = await Order.update(req.body, { where: { OrderId: id } });
-
       if (!updated) {
         return res.status(404).json({ message: 'Order not found' }); // Not found response if no rows were updated
       }
-
       // Fetching updated order details
       const updatedOrder = await Order.findByPk(id);
       return res.status(200).json(updatedOrder); // Returning the updated order
@@ -60,15 +56,12 @@ class OrderController {
   // Private route: Delete an order
   static async deleteOrder(req, res) {
     try {
-      const { id } = req.params; // Extracting order ID from request parameters
-      
+      const { id } = req.params; // Extracting order ID from request parameters     
       // Deleting order from the database
       const deleted = await Order.destroy({ where: { OrderId: id } });
-
       if (!deleted) {
         return res.status(404).json({ message: 'Order not found' }); // Not found response if no rows were deleted
       }
-
       return res.status(204).send(); // No content response for successful deletion
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Internal server error

@@ -27,11 +27,9 @@ class LocationController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const location = await Location.findByPk(id); // Find location by primary key (ID)
-
       if (!location) {
         return res.status(404).json({ message: 'Location not found' }); // Return 404 if location doesn't exist
       }
-
       return res.status(200).json(location); // Return found location with HTTP 200 (OK)
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Return error message if retrieval fails
@@ -43,11 +41,9 @@ class LocationController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const [updated] = await Location.update(req.body, { where: { LocationId: id } }); // Update location data
-
       if (!updated) {
         return res.status(404).json({ message: 'Location not found' }); // Return 404 if no rows were updated
       }
-
       const updatedLocation = await Location.findByPk(id); // Fetch the updated location
       return res.status(200).json(updatedLocation); // Return updated location with HTTP 200 (OK)
     } catch (error) {
@@ -60,11 +56,9 @@ class LocationController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const deleted = await Location.destroy({ where: { LocationId: id } }); // Delete location by ID
-
       if (!deleted) {
         return res.status(404).json({ message: 'Location not found' }); // Return 404 if no rows were deleted
       }
-
       return res.status(204).send(); // Return HTTP 204 (No Content) on successful deletion
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Return error message if deletion fails

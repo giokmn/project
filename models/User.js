@@ -13,7 +13,6 @@ module.exports = (sequelize) => {
       // Placeholder for associations (e.g., with other models).
     }
   }
-
   User.init(
     {
       FirstName: { type: DataTypes.STRING, allowNull: false }, // Required first name.
@@ -49,6 +48,5 @@ module.exports = (sequelize) => {
       },
     }
   );
-
   return User; // Returns User model.
 };

@@ -27,11 +27,9 @@ class PaymentController {
     try {
       const { id } = req.params; // Extracting the ID parameter from the request
       const payment = await Payment.findByPk(id); // Finding the payment by primary key
-
       if (!payment) {
         return res.status(404).json({ message: 'Payment not found' }); // Returning a 404 response if the payment does not exist
       }
-
       return res.status(200).json(payment); // Returning the found payment with HTTP status 200 (OK)
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Returning an error response if retrieval fails
@@ -43,11 +41,9 @@ class PaymentController {
     try {
       const { id } = req.params; // Extracting the ID parameter from the request
       const [updated] = await Payment.update(req.body, { where: { PaymentId: id } }); // Updating the payment record
-
       if (!updated) {
         return res.status(404).json({ message: 'Payment not found' }); // Returning a 404 response if the payment does not exist
       }
-
       const updatedPayment = await Payment.findByPk(id); // Fetching the updated payment record
       return res.status(200).json(updatedPayment); // Returning the updated payment with HTTP status 200 (OK)
     } catch (error) {
@@ -60,11 +56,9 @@ class PaymentController {
     try {
       const { id } = req.params; // Extracting the ID parameter from the request
       const deleted = await Payment.destroy({ where: { PaymentId: id } }); // Deleting the payment record
-
       if (!deleted) {
         return res.status(404).json({ message: 'Payment not found' }); // Returning a 404 response if the payment does not exist
       }
-
       return res.status(204).send(); // Returning HTTP status 204 (No Content) on successful deletion
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Returning an error response if deletion fails

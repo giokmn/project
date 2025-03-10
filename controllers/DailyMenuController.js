@@ -27,11 +27,9 @@ class DailyMenuController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const dailyMenu = await DailyMenu.findByPk(id); // Find daily menu by primary key (ID)
-
       if (!dailyMenu) {
         return res.status(404).json({ message: 'Daily menu not found' }); // Return 404 if daily menu doesn't exist
       }
-
       return res.status(200).json(dailyMenu); // Return found daily menu with HTTP 200 (OK)
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Return error message if retrieval fails
@@ -43,11 +41,9 @@ class DailyMenuController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const [updated] = await DailyMenu.update(req.body, { where: { DailyMenuId: id } }); // Update daily menu data
-
       if (!updated) {
         return res.status(404).json({ message: 'Daily menu not found' }); // Return 404 if no rows were updated
       }
-
       const updatedDailyMenu = await DailyMenu.findByPk(id); // Fetch the updated daily menu
       return res.status(200).json(updatedDailyMenu); // Return updated daily menu with HTTP 200 (OK)
     } catch (error) {
@@ -60,11 +56,9 @@ class DailyMenuController {
     try {
       const { id } = req.params; // Extract ID from request parameters
       const deleted = await DailyMenu.destroy({ where: { DailyMenuId: id } }); // Delete daily menu by ID
-
       if (!deleted) {
         return res.status(404).json({ message: 'Daily menu not found' }); // Return 404 if no rows were deleted
       }
-
       return res.status(204).send(); // Return HTTP 204 (No Content) on successful deletion
     } catch (error) {
       return res.status(500).json({ error: error.message }); // Return error message if deletion fails

@@ -27,7 +27,6 @@ class ProductController {
     try {
       const { id } = req.params;
       const product = await Product.findByPk(id, { attributes: ['ProductId', 'Name'] });
-
       if (!product) {
         return res.status(404).json({ message: 'Product not found' }); // Not found response
       }
@@ -52,7 +51,6 @@ class ProductController {
     try {
       const { id } = req.params;
       const product = await Product.findByPk(id);
-
       if (!product) {
         return res.status(404).json({ message: 'Product not found' });
       }
@@ -66,14 +64,11 @@ class ProductController {
   static async updateProduct(req, res) {
     try {
       const { id } = req.params;
-      
       // Updating product details in the database
       const [updated] = await Product.update(req.body, { where: { ProductId: id } });
-
       if (!updated) {
         return res.status(404).json({ message: 'Product not found' });
       }
-
       // Fetching updated product details
       const updatedProduct = await Product.findByPk(id);
       return res.status(200).json(updatedProduct);
@@ -86,14 +81,11 @@ class ProductController {
   static async deleteProduct(req, res) {
     try {
       const { id } = req.params;
-      
       // Deleting product from the database
       const deleted = await Product.destroy({ where: { ProductId: id } });
-
       if (!deleted) {
         return res.status(404).json({ message: 'Product not found' });
       }
-
       return res.status(204).send(); // No content response for successful deletion
     } catch (error) {
       return res.status(500).json({ error: error.message });
