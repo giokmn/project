@@ -1,6 +1,5 @@
 "use strict";  
 // Strict mode for safer JS.
-
 const { Model, DataTypes } = require("sequelize");  
 // Imports Sequelize Model and DataTypes.
 const bcrypt = require("bcrypt");  

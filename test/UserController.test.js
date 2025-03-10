@@ -1,7 +1,7 @@
 require('dotenv').config(); // Load env variables like JWT_SECRET for login tests
 const UserController = require('../controllers/UserController');
 const { User } = require('../models');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // Mocking dependencies to avoid real DB calls and crypto operations

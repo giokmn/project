@@ -1,5 +1,5 @@
 const { Customer } = require('../models'); // Import the Customer model
-const bcrypt = require('bcryptjs'); // Importing bcrypt for password hashing
+const bcrypt = require('bcrypt'); // Importing bcrypt for password hashing
 const jwt = require('jsonwebtoken'); // Importing jsonwebtoken for authentication
 
 class CustomerController {

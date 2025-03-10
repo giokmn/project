@@ -3,9 +3,8 @@
 
 const { Model, DataTypes } = require('sequelize');  
 // Imports Sequelize Model and DataTypes.
-const bcrypt = require('bcryptjs');  
+const bcrypt = require('bcrypt');  
 // Imports bcryptjs for password hashing.
-
 module.exports = (sequelize) => {  
   // Exports function to define Customer model.
   class Customer extends Model {  
