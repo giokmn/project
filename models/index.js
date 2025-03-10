@@ -20,7 +20,7 @@ const config = {
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_NAME,
   host: process.env.DATABASE_HOST,
-  dialect: process.env.DATABASE_DIALECT,
+  dialect: process.env.DATABASE_DIALECT || 'mysql',
 };
 
 const sequelize = new Sequelize(  
